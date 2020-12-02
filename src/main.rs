@@ -17,6 +17,6 @@ fn print_day(day: &str, input: &str) {
 fn main() {
     let day = args();
     let day = day.last().unwrap();
-    let input = read_to_string("input/".to_owned() + &day).unwrap();
+    let input = read_to_string("input/".to_owned() + &day).unwrap_or_default();
     print_day(&day, &input);
 }
