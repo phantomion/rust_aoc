@@ -14,7 +14,6 @@ pub fn day2_part1(input: &str) -> i32 {
         };
         let count = password
             .chars()
-            .into_iter()
             .filter(|character| *character == letter.chars().nth(0).unwrap())
             .count();
         if count >= min && count <= max {
@@ -42,15 +41,16 @@ pub fn day2_part2(input: &str) -> i32 {
         };
         let letter = letter.chars().nth(0).unwrap();
         let (pass_first, pass_second) = {
-            (password.chars().nth(first - 1).unwrap(), password.chars().nth(second - 1).unwrap())
+            (
+                password.chars().nth(first - 1).unwrap(),
+                password.chars().nth(second - 1).unwrap(),
+            )
         };
         if pass_first == letter && pass_second != letter {
             return acc + 1;
-        }
-        else if pass_first != letter && pass_second == letter {
+        } else if pass_first != letter && pass_second == letter {
             return acc + 1;
-        }
-        else {
+        } else {
             return acc;
         }
     });
