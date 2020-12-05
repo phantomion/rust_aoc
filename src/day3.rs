@@ -1,6 +1,5 @@
 pub fn day3_part1(input: &str) -> i32 {
-    let mut position = 0;
-    let count = input.lines().fold(0, |acc, line| {
+    let (_, count) = input.lines().fold((0, 0), |(position, acc), line| {
         let mut tree = 0;
         if position > 0 {
             let len = line.len();
@@ -10,8 +9,7 @@ pub fn day3_part1(input: &str) -> i32 {
                 tree = 1;
             }
         }
-        position = position + 3;
-        acc + tree
+        (position + 3, acc + tree)
     });
     return count;
 }
@@ -26,19 +24,20 @@ pub fn day3_part2(input: &str) -> i64 {
 }
 
 fn get_trees_on_slope(right: usize, down: usize, input: &str) -> i64 {
-    let mut position = 0;
-    let count = input.lines().step_by(down).fold(0, |acc, line| {
-        let mut tree = 0;
-        if position > 0 {
-            let len = line.len();
-            let node = line.chars().nth(position % len).unwrap();
+    let (_, count) = input
+        .lines()
+        .step_by(down)
+        .fold((0, 0), |(position, acc), line| {
+            let mut tree = 0;
+            if position > 0 {
+                let len = line.len();
+                let node = line.chars().nth(position % len).unwrap();
 
-            if node == '#' {
-                tree = 1;
+                if node == '#' {
+                    tree = 1;
+                }
             }
-        }
-        position = position + right;
-        acc + tree
-    });
+            (position + right, acc + tree)
+        });
     return count;
 }
