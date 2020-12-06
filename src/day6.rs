@@ -16,37 +16,36 @@ pub fn day6_part1(input: &str) -> usize {
     return count + answers.len();
 }
 
-pub fn day6_part2(input: &str) -> usize {
-    let (unique_answers, all_answers, count, group) = input.lines().fold(
-        (HashSet::new(), Vec::new(), 0, 0),
-        |(unique_answers, mut all_answers, count, group), line| {
+pub fn day6_part2(input: &str) -> i32 {
+    let (all_answers, count, group) = input.lines().fold(
+        (Vec::new(), 0, 0),
+        |(mut all_answers, count, group), line| {
             if line.is_empty() {
-                let unique_answers = find_unique_answers(group, unique_answers, all_answers);
-                return (HashSet::new(), Vec::new(), count + unique_answers.len(), 0);
+                let common_answers = find_common_answers(group, all_answers);
+                return (Vec::new(), count + common_answers, 0);
             }
             line.chars().for_each(|answer| all_answers.push(answer));
-            (unique_answers, all_answers, count, group + 1)
+            (all_answers, count, group + 1)
         },
     );
 
-    let unique_answers = find_unique_answers(group, unique_answers, all_answers);
-    return count + unique_answers.len();
+    let common_answers = find_common_answers(group, all_answers);
+    return count + common_answers;
 }
 
-fn find_unique_answers(
-    group: usize,
-    mut unique_answers: HashSet<char>,
-    all_answers: Vec<char>,
-) -> HashSet<char> {
-    ('a'..='z').for_each(|letter| {
-        let count = all_answers
-            .iter()
-            .filter(|&&answer| answer == letter)
-            .count();
-        if count == group {
-            unique_answers.insert(letter);
-        }
-    });
+fn find_common_answers(group: usize, all_answers: Vec<char>) -> i32 {
+    let common_answers = ('a'..='z')
+        .filter(|letter| all_answers.contains(letter))
+        .fold(0, |common_answers, letter| {
+            let count = all_answers
+                .iter()
+                .filter(|&&answer| answer == letter)
+                .count();
+            if count == group {
+                return common_answers + 1;
+            }
+            common_answers
+        });
 
-    unique_answers
+    common_answers
 }
