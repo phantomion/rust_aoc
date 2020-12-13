@@ -10,6 +10,7 @@ mod day9;
 mod day10;
 mod day11;
 mod day12;
+mod day13;
 use day1::*;
 use day2::*;
 use day3::*;
@@ -22,6 +23,7 @@ use day9::*;
 use day10::*;
 use day11::*;
 use day12::*;
+use day13::*;
 use std::env::args;
 use std::fs::read_to_string;
 
@@ -71,9 +73,13 @@ fn print_day(day: &str, input: &str) {
             println!("{}_part1: {}", day, day11_part1(input));
             println!("{}_part2: {}", day, day11_part2(input));
         }
-        "day12" | "test12" => {
+        "day12" => {
             println!("{}_part1: {}", day, day12_part1(input));
             println!("{}_part2: {}", day, day12_part2(input));
+        }
+        "day13" | "test13" => {
+            println!("{}_part1: {}", day, day13_part1(input));
+            println!("{}_part2: {}", day, day13_part2(input));
         }
         _ => println!("Day not found."),
     }
