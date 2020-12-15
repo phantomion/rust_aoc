@@ -86,6 +86,6 @@ fn get_seats_in_line(char_index: i32, line: &Vec<(char, char)>) -> i32 {
     0
 }
 
-pub fn day11_part2(input: &str) -> i32 {
+pub fn day11_part2(_input: &str) -> i32 {
     1
 }

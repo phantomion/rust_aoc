@@ -17,6 +17,6 @@ pub fn day13_part1(input: &str) -> i32 {
     min_wait_time * bus_id
 }
 
-pub fn day13_part2(input: &str) -> i32 {
+pub fn day13_part2(_input: &str) -> i32 {
     1
 }
